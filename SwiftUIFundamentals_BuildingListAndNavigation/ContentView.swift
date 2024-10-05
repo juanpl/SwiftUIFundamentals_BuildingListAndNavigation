@@ -16,22 +16,39 @@ struct ContentView: View {
     ]
     
     var body: some View {
-        List(villages) { village in
-            HStack(alignment: .center){
-                Image(village.photo)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    .frame(width: 200.0)
-                VStack(alignment: .leading) {
-                    Text(village.name)
-                    Text("\(village.size) Km2")
+        NavigationStack {
+            List(villages) { village in
+                NavigationLink(value: village) {
+                    VillageCellView(village: village)
                 }
-            }
+                
+            }.navigationTitle("Villages")
+                .navigationDestination(for: Village.self) { village in
+                    Text(village.name)
+                }
         }
     }
 }
 
 #Preview {
     ContentView()
+}
+
+struct VillageCellView: View {
+    
+    let village: Village
+    
+    var body: some View {
+        HStack(alignment: .center){
+            Image(village.photo)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .frame(width: 150)
+            VStack(alignment: .leading) {
+                Text(village.name)
+                Text("\(village.size) Km2")
+            }
+        }
+    }
 }

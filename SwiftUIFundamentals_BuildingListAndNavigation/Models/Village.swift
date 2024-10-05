@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Village: Identifiable {
+struct Village: Identifiable, Hashable {
     let id = UUID()
     let name: String
     let photo: String
