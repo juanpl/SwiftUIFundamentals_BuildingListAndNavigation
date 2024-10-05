@@ -24,7 +24,7 @@ struct ContentView: View {
                 
             }.navigationTitle("Villages")
                 .navigationDestination(for: Village.self) { village in
-                    Text(village.name)
+                    VillageDetailScreen(village: village)
                 }
         }
     }
